@@ -43,12 +43,19 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         try:
-            args = shlex.split(args)
+            args = self.splitter(args)
             new_instance = eval(args[0])()
             new_instance.save()
             print(new_instance.id)
 
-        except:
+            # The following lines will update the created class
+            arg = args[0] + ' ' + new_instance.id
+            for x in args[1:]:
+                n_ag = x.split("=")
+                arg1 = arg + ' ' + n_ag[0] + ' ' + n_ag[1].replace("_", " ")
+                self.do_update(arg1)
+
+        except BaseException:
             print("** class doesn't exist **")
 
     def do_show(self, args):
@@ -124,12 +131,20 @@ class HBNBCommand(cmd.Cmd):
             return
         for key, val in objects.items():
             if len(args) != 0:
-                if type(val) is eval(args):
+                if isinstance(val, eval(args)):
                     obj_list.append(val)
             else:
                 obj_list.append(val)
 
         print(obj_list)
+
+    def splitter(self, line):
+        """ Function to split argument lines"""
+        lex = shlex.shlex(line)
+        lex.quotes = '"'
+        lex.whitespace_split = True
+        lex.commenters = ''
+        return list(lex)
 
     def do_update(self, args):
         '''
@@ -138,7 +153,7 @@ class HBNBCommand(cmd.Cmd):
         '''
         storage = FileStorage()
         storage.reload()
-        args = shlex.split(args)
+        args = self.splitter(args)
         if len(args) == 0:
             print("** class name missing **")
             return
@@ -193,7 +208,7 @@ class HBNBCommand(cmd.Cmd):
             return
         for key, val in objects.items():
             if len(args) != 0:
-                if type(val) is eval(args):
+                if isinstance(val, eval(args)):
                     obj_list.append(val)
             else:
                 obj_list.append(val)
@@ -213,7 +228,7 @@ class HBNBCommand(cmd.Cmd):
             cmd_arg = args[0] + " " + args[2]
             func = functions[args[1]]
             func(cmd_arg)
-        except:
+        except BaseException:
             print("*** Unknown syntax:", args[0])
 
 
