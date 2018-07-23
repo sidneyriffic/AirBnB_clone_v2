@@ -54,6 +54,7 @@ class HBNBCommand(cmd.Cmd):
                 n_ag = x.split("=")
                 arg1 = arg + ' ' + n_ag[0] + ' ' + n_ag[1].replace("_", " ")
                 self.do_update(arg1)
+                #print(arg1)
 
         except BaseException:
             print("** class doesn't exist **")
