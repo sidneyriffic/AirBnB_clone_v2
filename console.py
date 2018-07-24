@@ -55,14 +55,12 @@ class HBNBCommand(cmd.Cmd):
                 if hasattr(new_instance, n_ag[0]):
                     try:
                         n_ag[1] = eval(n_ag[1])
-                    except:
+                    except(IndexError, ValueError):
                         pass
                     setattr(new_instance, n_ag[0], n_ag[1])
             new_instance.save()
             print(new_instance.id)
-
-
-        except IndexError:
+        except NameError:
             print("** class doesn't exist **")
 
     def do_show(self, args):
