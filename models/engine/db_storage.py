@@ -12,16 +12,20 @@ from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
+
 class DBStorage:
     __engine = None
     __session = None
 
     def __init__(self):
         '''Used to instantiate engine and create attributes'''
-        self.__engine = ('mysql+mysqldb://{}:{}@{}/{}'.format
-                         (getenv('HBNB_MYSQL_USER'), getenv('HBNB_MYSQL_PWD'),
-                          getenv('HBNB_MYSQL_HOST'), getenv('HBNB_MYSQL_DB')),
-                         pool_pre_ping=True)
+        self.__engine = create_engine(
+            'mysql+mysqldb://{}:{}@{}/{}'.format(
+                getenv('HBNB_MYSQL_USER'),
+                getenv('HBNB_MYSQL_PWD'),
+                getenv('HBNB_MYSQL_HOST'),
+                getenv('HBNB_MYSQL_DB')),
+            pool_pre_ping=True)
         Base.metadata.create_all(self.__engine)
         Session = sessionmaker(bind=self.__engine)
         self.__session = Session()
