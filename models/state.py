@@ -22,12 +22,15 @@ class State(BaseModel, Base):
 
     else:
     	name = ""
-   	@property
+
+    @property
     def cities(self):
+        '''
+        Get a list of cities based on state.id
+        '''
     	my_list = []
-    		
+
     	for value in models.storage.all(City).values():
-    		if self.id == state_id:
+    		if self.id == city.state_id:
     			my_list.append(value)
    		return my_list
-    	
