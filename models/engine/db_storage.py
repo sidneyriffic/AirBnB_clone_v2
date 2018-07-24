@@ -38,12 +38,12 @@ class DBStorage:
         all_dict = {}
         if cls:
             for item in self.__session.query(models.tmp_class[cls]).all():
-                key = '{}.{}'.format(item.__class__.name, item.id)
+                key = '{}.{}'.format(item.__class__.__name__, item.id)
                 all_dict[key] = item
         else:
             for item, value in models.tmp_class.items():
                 for it in self.__session.query(value).all():
-                    key = '{}.{}'.format(it.__class__.name, it.id)
+                    key = '{}.{}'.format(it.__class__.__name__, it.id)
                     all_dict[key] = it
         return all_dict
 

@@ -14,7 +14,7 @@ from models.amenity import Amenity
 from models.review import Review
 from os import getenv
 
-tmp_class = {"State": State, "City": City}
+tmp_class = {"State": State, "City": City, "User": User}
 classes = {"User": User, "BaseModel": BaseModel,
            "Place": Place, "State": State,
            "City": City, "Amenity": Amenity,
