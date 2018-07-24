@@ -15,7 +15,7 @@ class FileStorage:
 
     def all(self, cls=None):
         '''
-            Return the dictionary
+        Return the dictionary
         '''
         if cls:
             my_dict = {}
@@ -27,9 +27,9 @@ class FileStorage:
 
     def new(self, obj):
         '''
-            Set in __objects the obj with key <obj class name>.id
-            Aguments:
-                obj : An instance object.
+        Set in __objects the obj with key <obj class name>.id
+        Aguments:
+        obj : An instance object.
         '''
         key = str(obj.__class__.__name__) + "." + str(obj.id)
         value_dict = obj
@@ -37,7 +37,7 @@ class FileStorage:
 
     def save(self):
         '''
-            Serializes __objects attribute to JSON file.
+        Serializes __objects attribute to JSON file.
         '''
         objects_dict = {}
         for key, val in FileStorage.__objects.items():
