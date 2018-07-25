@@ -8,7 +8,12 @@ import models
 import sqlalchemy
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
+from os import getenv
 
+if getenv('HBNB_TYPE_STORAGE') == 'db':
+    Base = declarative_base()
+else:
+    Base = object
 
 class BaseModel:
     '''
@@ -19,11 +24,11 @@ class BaseModel:
     created_at = Column(
         DateTime,
         nullable=False,
-        default=datetime.datetime.utcnow)
+        default=datetime.utcnow)
     updated_at = Column(
         DateTime,
         nullable=False,
-        default=datetime.datetime.utcnow)
+        default=datetime.utcnow)
 
     def __init__(self, *args, **kwargs):
         '''
