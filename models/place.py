@@ -8,6 +8,7 @@ from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
 from sqlalchemy.orm import relationship
 from os import getenv
 
+
 if getenv("HBNB_TYPE_STORAGE"):
     place_amenity = Table("place_amenity", Base.metadata,
                           Column('place_id', String(60),
@@ -15,13 +16,14 @@ if getenv("HBNB_TYPE_STORAGE"):
                           Column('amenity_id', String(60),
                                  ForeignKey("amenities.id"), primary_key=True))
 
+
 class Place(BaseModel, Base):
     '''
         Define the class Place that inherits from BaseModel.
     '''
     if getenv("HBNB_TYPE_STORAGE") == "db":
         __tablename__ = "places"
-        city_id = Column(String(60),ForeignKey("cities.id"),
+        city_id = Column(String(60), ForeignKey("cities.id"),
                          nullable=False)
         user_id = Column(String(60), ForeignKey("users.id"),
                          nullable=False)
@@ -36,7 +38,7 @@ class Place(BaseModel, Base):
         reviews = relationship('Review', cascade='all, delete-orphan',
                                backref='place')
         amenities = relationship('Amenity', cascade='all',
-                                 secondary = place_amenity,
+                                 secondary=place_amenity,
                                  backref='place_amenities')
         '''amenity_ids = []'''
     else:
