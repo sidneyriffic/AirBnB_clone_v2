@@ -127,17 +127,17 @@ class HBNBCommand(cmd.Cmd):
         arg = shlex.split(line)
         objects = storage.all()
         if len(arg) < 1:
-            print("[\"", end="")
-            print("\", \"".join(str(objects[obj])
+            print("[", end="")
+            print(", ".join(str(objects[obj])
                                 for obj in objects), end="")
-            print("\"]")
+            print("]")
         else:
             if arg[0] in self.__validclasses:
                 listclass = [str(objects[obj]) for obj in objects
                              if objects[obj].__class__.__name__ == arg[0]]
-                print("[\"", end="")
-                print("\", \"".join(listclass), end="")
-                print("\"]")
+                print("[", end="")
+                print(", ".join(listclass), end="")
+                print("]")
             else:
                 print("** class doesn't exist **")
 
