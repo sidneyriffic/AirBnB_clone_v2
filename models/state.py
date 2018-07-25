@@ -3,7 +3,7 @@
     Implementation of the State class
 '''
 
-from models.base_model import BaseModel
+from models.base_model import BaseModel, Base
 import sqlalchemy
 from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
@@ -19,7 +19,8 @@ class State(BaseModel, Base):
     __tablename__ = "states"
     if getenv("HBNB_TYPE_STORAGE") == "db":
         name = Column(String(128), nullable=False)
-        cities = relationship('City', cascade='all, delete', backref='state')
+        cities = relationship('City', cascade='all, delete-orphan',
+                              backref='state')
 
     else:
         name = ""
