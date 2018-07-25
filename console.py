@@ -143,23 +143,6 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** class doesn't exist **")
 
-        """
-        data_dump = models.storage.all()
-        print("[", end="")
-        if line == "":
-            for instance_key, instance_obj in data_dump.items():
-                print(instance_obj)
-        else:
-            arg = line.split()
-            if arg[0] not in self.group:
-                print("** class doesn't exist **")
-            else:
-                for instance_key, instance_obj in data_dump.items():
-                    obj = instance_obj.to_dict()
-                    if obj['__class__'] == arg[0]:
-                        print(instance_obj)
-"""
-
     def splitter(self, line):
         """ Function to split argument lines"""
         lex = shlex.shlex(line)
