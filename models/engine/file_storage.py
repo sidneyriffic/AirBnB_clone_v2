@@ -13,17 +13,23 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    def all(self, cls=None):
         '''
-            Return the dictionary
+        Return the dictionary
         '''
+        if cls:
+            my_dict = {}
+            for key, value in self.__objects.items():
+                if value.__class__ == cls:
+                    my_dict[key] = value
+            return my_dict
         return self.__objects
 
     def new(self, obj):
         '''
-            Set in __objects the obj with key <obj class name>.id
-            Aguments:
-                obj : An instance object.
+        Set in __objects the obj with key <obj class name>.id
+        Aguments:
+        obj : An instance object.
         '''
         key = str(obj.__class__.__name__) + "." + str(obj.id)
         value_dict = obj
@@ -31,7 +37,7 @@ class FileStorage:
 
     def save(self):
         '''
-            Serializes __objects attribute to JSON file.
+        Serializes __objects attribute to JSON file.
         '''
         objects_dict = {}
         for key, val in FileStorage.__objects.items():
@@ -53,3 +59,13 @@ class FileStorage:
                 FileStorage.__objects[key] = class_name(**val)
         except FileNotFoundError:
             pass
+
+    def delete(self, obj=None):
+        """
+        Public instance method to delete obj from __objects
+        """
+        copy = dict(FileStorage.__objects)
+        for key, value in copy.items():
+            if value == obj:
+                del FileStorage.__objects[key]
+            self.save()
