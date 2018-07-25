@@ -124,7 +124,26 @@ class HBNBCommand(cmd.Cmd):
             Prints all string representation of all instances
             based or not on the class name.
         '''
+        arg = shlex.split(line)
+        objects = storage.all()
+        if len(arg) < 1:
+            print("[\"", end="")
+            print("\", \"".join(str(objects[obj])
+                                for obj in objects), end="")
+            print("\"]")
+        else:
+            if arg[0] in self.__validclasses:
+                listclass = [str(objects[obj]) for obj in objects
+                             if objects[obj].__class__.__name__ == arg[0]]
+                print("[\"", end="")
+                print("\", \"".join(listclass), end="")
+                print("\"]")
+            else:
+                print("** class doesn't exist **")
+
+        """
         data_dump = models.storage.all()
+        print("[", end="")
         if line == "":
             for instance_key, instance_obj in data_dump.items():
                 print(instance_obj)
@@ -137,6 +156,7 @@ class HBNBCommand(cmd.Cmd):
                     obj = instance_obj.to_dict()
                     if obj['__class__'] == arg[0]:
                         print(instance_obj)
+"""
 
     def splitter(self, line):
         """ Function to split argument lines"""
