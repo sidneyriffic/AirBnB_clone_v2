@@ -37,14 +37,15 @@ class DBStorage:
         '''Run a query on the Current database session'''
         all_dict = {}
         if cls:
-            for item in self.__session.query(models.tmp_class[cls]).all():
-                key = '{}.{}'.format(item.__class__.__name__, item.id)
+            for item in self.__session.query(models.classes[cls]).all():
+                key = '{}.{}'.format(item.__class__.name, item.id)
                 all_dict[key] = item
         else:
-            for item, value in models.tmp_class.items():
-                for it in self.__session.query(value).all():
-                    key = '{}.{}'.format(it.__class__.__name__, it.id)
-                    all_dict[key] = it
+            for item, value in models.classes.items():
+                if type(value) is not type(BaseModel):
+                    for it in self.__session.query(value).all():
+                        key = '{}.{}'.format(it.__class__.__name__, it.id)
+                        all_dict[key] = it
         return all_dict
 
     def new(self, obj):

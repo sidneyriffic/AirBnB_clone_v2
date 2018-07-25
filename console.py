@@ -125,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
             based or not on the class name.
         '''
         data_dump = models.storage.all()
-        if line is "":
+        if line == "":
             for instance_key, instance_obj in data_dump.items():
                 print(instance_obj)
         else:

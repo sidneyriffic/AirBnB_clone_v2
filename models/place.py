@@ -4,8 +4,15 @@
 '''
 from models.base_model import BaseModel, Base
 import sqlalchemy
-from sqlalchemy import Column, String, ForeignKey, Integer, Float
+from sqlalchemy import Column, String, ForeignKey, Integer, Float, Table
+from sqlalchemy.orm import relationship
 from os import getenv
+
+place_amenity = Table("place_amenity", Base.metadata,
+                      Column('place_id', String(60),
+                             ForeignKey("places.id"), primary_key=True),
+                      Column('amenity_id', String(60),
+                             ForeignKey("amenities.id"), primary_key=True))
 
 class Place(BaseModel, Base):
     '''
@@ -25,6 +32,11 @@ class Place(BaseModel, Base):
         price_by_night = Column(Integer, nullable=False, default=0)
         latitude = Column(Float, default=0.0)
         longitude = Column(Float, default=0.0)
+        reviews = relationship('Review', cascade='all, delete-orphan',
+                               backref='place')
+        amenities = relationship('Amenity', cascade='all',
+                                 secondary = place_amenity,
+                                 backref='place_amenities')
         '''amenity_ids = []'''
     else:
         city_id = ""
