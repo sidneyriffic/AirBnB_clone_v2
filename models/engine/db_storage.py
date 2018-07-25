@@ -42,9 +42,10 @@ class DBStorage:
                 all_dict[key] = item
         else:
             for item, value in models.classes.items():
-                for it in self.__session.query(value).all():
-                    key = '{}.{}'.format(it.__class__.name. it.id)
-                    all_dict[key] = it
+                if type(value) is not type(BaseModel):
+                    for it in self.__session.query(value).all():
+                        key = '{}.{}'.format(it.__class__.__name__, it.id)
+                        all_dict[key] = it
         return all_dict
 
     def new(self, obj):
