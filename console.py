@@ -49,6 +49,7 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             args = self.splitter(args)
+            print(args)
             new_instance = eval(args[0])()
             for x in args[1:]:
                 n_ag = x.split("=")
@@ -57,6 +58,8 @@ class HBNBCommand(cmd.Cmd):
                         n_ag[1] = eval(n_ag[1])
                     except(IndexError, ValueError):
                         pass
+                    if type(n_ag[1]) is str:
+                        n_ag[1] = n_ag[1].replace("_", " ")
                     setattr(new_instance, n_ag[0], n_ag[1])
             new_instance.save()
             print(new_instance.id)
@@ -132,7 +135,7 @@ class HBNBCommand(cmd.Cmd):
                                 for obj in objects), end="")
             print("]")
         else:
-            if arg[0] in self.__validclasses:
+            if arg[0] in self.group:
                 listclass = [str(objects[obj]) for obj in objects
                              if objects[obj].__class__.__name__ == arg[0]]
                 print("[", end="")
