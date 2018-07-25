@@ -131,7 +131,7 @@ class HBNBCommand(cmd.Cmd):
         if len(arg) < 1:
             print("[", end="")
             print(", ".join(str(objects[obj])
-                                for obj in objects), end="")
+                            for obj in objects), end="")
             print("]")
         else:
             if arg[0] in self.group:
