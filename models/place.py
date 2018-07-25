@@ -39,6 +39,7 @@ class Place(BaseModel, Base):
                                backref='place')
         amenities = relationship('Amenity', cascade='all',
                                  secondary=place_amenity,
+                                 viewonly=False,
                                  backref='place_amenities')
         '''amenity_ids = []'''
     else:
