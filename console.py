@@ -49,7 +49,6 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             args = self.splitter(args)
-            print(args)
             new_instance = eval(args[0])()
             for x in args[1:]:
                 n_ag = x.split("=")
