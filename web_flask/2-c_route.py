@@ -20,6 +20,7 @@ if __name__ == "__main__":
     @app.route('/c/<text>', strict_slashes=False)
     def c_route(text):
         """output some text depending on url after /c/"""
-        return text
+        text.replace('_', ' ')
+        return "C " + text
 
     app.run(host='0.0.0.0')
