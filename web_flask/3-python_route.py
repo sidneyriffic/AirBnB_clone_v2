@@ -22,7 +22,7 @@ if __name__ == "__main__":
         """output some text depending on url after /c/"""
         return "C " + text.replace('_', ' ')
 
-    @app.route('/python/', defaults={'text':"is cool"}, strict_slashes=False)
+    @app.route('/python/', defaults={'text': "is cool"}, strict_slashes=False)
     @app.route('/python/<text>', strict_slashes=False)
     def python_route(text):
         """output some text depending on url after /python/"""
