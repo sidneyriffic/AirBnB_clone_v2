@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 @app.route('/', strict_slashes=False)
-def hello_world():
+def hello_route():
     """root folder route"""
     return "Hello, HBNB!"
 
