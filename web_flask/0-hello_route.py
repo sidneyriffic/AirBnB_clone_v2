@@ -1,17 +1,17 @@
 #!/usr/bin/python3
 """The / route"""
 
-
-from flask import Flask
-
-
-app = Flask(__name__)
+if __name__ == "main":
+    from flask import Flask
 
 
-@app.route('/', strict_slashes=False)
-def hello_route():
-    """root folder route"""
-    return "Hello, HBNB!"
+    app = Flask(__name__)
 
 
-app.run(host='0.0.0.0')
+    @app.route('/', strict_slashes=False)
+    def hello_route():
+        """root folder route"""
+        return "Hello, HBNB!"
+
+
+    app.run(host='0.0.0.0')
