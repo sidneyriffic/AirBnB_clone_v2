@@ -14,4 +14,4 @@ def hello_route():
     return "Hello, HBNB!"
 
 
-app.run(host= '0.0.0.0')
+app.run(host='0.0.0.0')
