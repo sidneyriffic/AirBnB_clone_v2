@@ -15,7 +15,7 @@ if __name__ == "__main__":
         statedict = storage.all(State)
         return flask.render_template('7-states_list.html', states=statedict)
 
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=5000)
 
     @app.teardown_appcontext
     def teardown_appcontext(exception):
