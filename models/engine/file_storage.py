@@ -17,6 +17,7 @@ class FileStorage:
         '''
         Return the dictionary
         '''
+        self.close()
         if cls:
             my_dict = {}
             for key, value in self.__objects.items():
