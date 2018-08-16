@@ -22,3 +22,7 @@ if __name__ == "__main__":
                                      stateidname=stateidname)
 
     app.run(host='0.0.0.0')
+
+    @app.teardown_appcontext
+    def teardown_appcontext():
+        storage.close()
