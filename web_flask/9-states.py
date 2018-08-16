@@ -15,10 +15,13 @@ if __name__ == "__main__":
         """list states from database"""
         validid = 0
         states = storage.all(State).values()
-        for state in states:
-            if id == state.id:
-                validid = 1
-                break
+        if id is None:
+            validid = 1
+        else:
+            for state in states:
+                if id == state.id:
+                    validid = 1
+                    break
         return flask.render_template('9-states.html', idnum=id,
                                      states=storage.all(State),
                                      validid=validid)
