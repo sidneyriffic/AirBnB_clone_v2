@@ -16,6 +16,7 @@ if __name__ == "__main__":
         stateidname = []
         for state in states:
             stateidname.append((states[state].id, states[state].name))
+
         def getkey(item):
             return item[1]
         stateidname.sort(key=getkey)
