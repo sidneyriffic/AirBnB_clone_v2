@@ -31,6 +31,6 @@ if __name__ == "__main__":
     @app.route('/number/<int:n>', strict_slashes=False)
     def number_route(n):
         """output some number depending on url after /number/"""
-        return str(n)
+        return str(n) + " is a number"
 
     app.run(host='0.0.0.0')
