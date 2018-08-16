@@ -60,6 +60,9 @@ class FileStorage:
         except FileNotFoundError:
             pass
 
+    def close(self):
+        self.reload()
+
     def delete(self, obj=None):
         """
         Public instance method to delete obj from __objects

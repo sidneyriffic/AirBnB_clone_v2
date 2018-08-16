@@ -31,7 +31,6 @@ class BaseModel:
         DateTime,
         nullable=False,
         default=datetime.utcnow)
-
     def __init__(self, *args, **kwargs):
         '''
             Initialize public instance attributes.
@@ -42,13 +41,21 @@ class BaseModel:
             self.updated_at = datetime.now()
 
         else:
-            kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
-                                                     "%Y-%m-%dT%H:%M:%S.%f")
-            kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"],
-                                                     "%Y-%m-%dT%H:%M:%S.%f")
+            try:
+                kwargs["created_at"] = datetime.strptime(kwargs["created_at"],
+                                                         "%Y-%m-%dT%H:%M:%S.%f")
+            except KeyError:
+                self.created_at = datetime.now()
+            try:
+                kwargs["updated_at"] = datetime.strptime(kwargs["updated_at"],
+                                                         "%Y-%m-%dT%H:%M:%S.%f")
+            except KeyError:
+                self.updated_at = datetime.now()
             for key, val in kwargs.items():
                 if key != '__class__':
                     setattr(self, key, val)
+            if self.id is not None:
+                self.id = str(uuid.uuid4())
 
     def __str__(self):
         '''
