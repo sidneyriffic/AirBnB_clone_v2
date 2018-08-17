@@ -37,8 +37,6 @@ class DBStorage:
         '''Run a query on the Current database session'''
         all_dict = {}
         self.close()
-        if type(cls) == str:
-            cls = eval(cls)
         if cls:
             for item in self.__session.query(cls).all():
                 key = '{}.{}'.format(item.__class__.name, item.id)
